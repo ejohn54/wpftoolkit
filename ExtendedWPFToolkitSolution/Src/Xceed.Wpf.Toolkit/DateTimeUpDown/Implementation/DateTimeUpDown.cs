@@ -83,7 +83,7 @@ namespace Xceed.Wpf.Toolkit
       try
       {
         // Test the format string if it is used.
-        DateTime.MinValue.ToString( ( string )value, CultureInfo.CurrentCulture );
+        CultureInfo.CurrentCulture.DateTimeFormat.Calendar.MinSupportedDateTime.ToString((string)value, CultureInfo.CurrentCulture);
       }
       catch
       {
