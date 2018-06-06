@@ -145,6 +145,7 @@ namespace Xceed.Wpf.Toolkit
       collectionControlDialog.ItemsSourceType = this.ItemsSourceType;
       collectionControlDialog.IsReadOnly = this.IsReadOnly;
       collectionControlDialog.EditorDefinitions = this.EditorDefinitions;
+      collectionControlDialog.Owner = Window.GetWindow(this);
       collectionControlDialog.ShowDialog();
     }
 
