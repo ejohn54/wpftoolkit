@@ -231,7 +231,7 @@ namespace Xceed.Wpf.Toolkit
           result = new TimeSpan( haveDays ? int.Parse( values[ 0 ] ) : 0,  //Days
                                  haveDays ? int.Parse( values[ 1 ] ) : int.Parse( values[ 0 ] ),  //Hours
                                  haveDays ? int.Parse( values[ 2 ] ) : int.Parse( values[ 1 ] ),  //Minutes
-                                 ( haveDays && this.ShowSeconds ) ? int.Parse( values[ 3 ] ) : this.ShowSeconds ? int.Parse( values[ 2 ] ) : 0,  //Seconds
+                                 ( haveDays && this.ShowSeconds && values.Count() > 3 ) ? int.Parse( values[ 3 ] ) : this.ShowSeconds && values.Count() > 2 ? int.Parse( values[ 2 ] ) : 0,  //Seconds
                                  haveMS ? int.Parse( values.Last() ) : 0 );  //Milliseconds
         }
       }
