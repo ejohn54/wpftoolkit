@@ -2,7 +2,7 @@
 
    Toolkit for WPF
 
-   Copyright (C) 2007-2017 Xceed Software Inc.
+   Copyright (C) 2007-2018 Xceed Software Inc.
 
    This program is provided to you under the terms of the Microsoft Public
    License (Ms-PL) as published at http://wpftoolkit.codeplex.com/license 
@@ -46,7 +46,8 @@ namespace Xceed.Wpf.Toolkit.LiveExplorer
       InitializeComponent();
       this.Loaded += new RoutedEventHandler( this.MainWindow_Loaded );
 
-      VersionTextBlock.Text = "Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+      var version = Assembly.GetExecutingAssembly().GetName().Version;
+      VersionTextBlock.Text = "Version: " + version.Major + "." + version.Minor;
     }
 
 
