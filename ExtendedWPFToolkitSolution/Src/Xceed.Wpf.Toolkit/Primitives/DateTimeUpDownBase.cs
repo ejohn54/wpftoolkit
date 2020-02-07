@@ -1,5 +1,5 @@
 ﻿/*************************************************************************************
-   
+
    Toolkit for WPF
 
    Copyright (C) 2007-2019 Xceed Software Inc.
@@ -229,7 +229,7 @@ namespace Xceed.Wpf.Toolkit.Primitives
         }
         ) );
         return;
-      }     
+      }
 
       this.Select( dateTimeInfo );
     }
@@ -252,7 +252,7 @@ namespace Xceed.Wpf.Toolkit.Primitives
 
     internal DateTimeInfo GetDateTimeInfo( DateTimePart part )
     {
-      return _dateTimeInfoList.FirstOrDefault( ( info ) =>info.Type == part );
+      return _dateTimeInfoList.FirstOrDefault( ( info ) =>info.Type == part ) ?? _dateTimeInfoList.FirstOrDefault();
     }
 
     internal virtual void Select( DateTimeInfo info )
@@ -321,7 +321,7 @@ namespace Xceed.Wpf.Toolkit.Primitives
       {
         this.Select( this.GetPreviousDateTimeInfo( nextSelectionStart - 1 ) );
       }
-    }    
+    }
 
     private DateTimeInfo GetNextDateTimeInfo( int nextSelectionStart )
     {

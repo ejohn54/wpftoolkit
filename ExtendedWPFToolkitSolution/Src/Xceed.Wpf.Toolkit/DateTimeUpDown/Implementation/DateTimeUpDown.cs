@@ -1,5 +1,5 @@
 ﻿/*************************************************************************************
-   
+
    Toolkit for WPF
 
    Copyright (C) 2007-2019 Xceed Software Inc.
@@ -127,7 +127,7 @@ namespace Xceed.Wpf.Toolkit
 
     #region Kind
 
-    public static readonly DependencyProperty KindProperty = DependencyProperty.Register( "Kind", typeof( DateTimeKind ), typeof( DateTimeUpDown ), 
+    public static readonly DependencyProperty KindProperty = DependencyProperty.Register( "Kind", typeof( DateTimeKind ), typeof( DateTimeUpDown ),
       new FrameworkPropertyMetadata( DateTimeKind.Unspecified, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnKindChanged ) );
     public DateTimeKind Kind
     {
@@ -152,7 +152,7 @@ namespace Xceed.Wpf.Toolkit
     {
       //Upate the value based on kind. (Postpone to EndInit if not yet initialized)
       if( !_setKindInternal
-        && this.Value != null 
+        && this.Value != null
         && this.IsInitialized )
       {
         this.Value = this.ConvertToKind( this.Value.Value, newValue );
@@ -168,7 +168,7 @@ namespace Xceed.Wpf.Toolkit
         // Warning : Binding could be lost
         this.Kind = kind;
 #else
-        //We use SetCurrentValue to not erase the possible underlying 
+        //We use SetCurrentValue to not erase the possible underlying
         //OneWay Binding. (This will also update correctly any
         //possible TwoWay bindings).
         this.SetCurrentValue( DateTimeUpDown.KindProperty, kind );
@@ -243,7 +243,7 @@ namespace Xceed.Wpf.Toolkit
       {
         this.Increment( this.Step );
       }
-    }    
+    }
 
     protected override void OnDecrement()
     {
@@ -272,11 +272,11 @@ namespace Xceed.Wpf.Toolkit
       //Do not force "unspecified" to a time-zone specific
       //parsed text value. This would result in a lost of precision and
       //corrupt data. Let the value impose the Kind to the
-      //DateTimePicker. 
+      //DateTimePicker.
       if( this.Kind != DateTimeKind.Unspecified )
       {
 
-        //Keep the current kind (Local or Utc) 
+        //Keep the current kind (Local or Utc)
         //by imposing it to the parsed text value.
         //
         //Note: A parsed UTC text value may be
@@ -289,7 +289,9 @@ namespace Xceed.Wpf.Toolkit
         return this.GetClippedMinMaxValue( result );
       }
 
-      this.ValidateDefaultMinMax( result );
+      // Dont throw exception (ValidateDefaultMinMax, throws exception)  Just fix the value with CoerceValueMinMax.
+      //this.ValidateDefaultMinMax( result );
+      result = (DateTime)CoerceValueMinMax(result);
 
       return result;
     }
@@ -983,9 +985,9 @@ namespace Xceed.Wpf.Toolkit
         return dateTime;
 
       //"ToLocalTime()" from an unspecified will assume
-      // That the time was originaly Utc and affect the datetime value. 
+      // That the time was originaly Utc and affect the datetime value.
       // Just "Force" the "Kind" instead.
-      if( dateTime.Kind == DateTimeKind.Unspecified 
+      if( dateTime.Kind == DateTimeKind.Unspecified
         || kind == DateTimeKind.Unspecified )
         return DateTime.SpecifyKind( dateTime, kind );
 
